@@ -1,7 +1,4 @@
-/*'https://pokeapi.co/api/v2/pokemon/bulbasaur' "https://pokeapi.co/api/v2/evolution-chain/1/"*/
-/*"https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0."*/
-
-fetch()
+fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
         .then(response => {
             if (!response.ok) {
             throw new Error('Network response was not ok');

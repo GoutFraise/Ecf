@@ -1,0 +1,76 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: inherit;
+	font: inherit;
+	text-decoration: none;
+	list-style: none;
+	border: none;
+    
+}
+img{
+    width: 200px;
+}
+/*header*/
+header{
+    display: flex;
+    width: 100%;
+    background-color: #FF0000;
+    justify-content: space-between;
+    padding: 20px 50px;
+    align-items: center;
+    gap: 100px;
+    
+}
+header>div,header>div>input::placeholder, header>nav>a,header>div>input{
+    background-color: #3D7DCA;
+    color: #FEFEFE;
+}
+header>div {
+    display: flex;
+    padding: 0 10px ;
+    gap: 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    width:100%;
+}
+header>div>i{
+    padding: 10px 0;
+}
+header>div>input{
+    width: 100%;
+    padding: 10px 0;
+}
+header>div>input:focus{
+    outline:  none;
+}
+header>nav{
+    display: flex;
+    gap:36px;
+}
+header>nav>a{
+    width:max-content;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px;
+    gap: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/*Footer*/
+footer{
+    display: flex;
+    justify-content: space-around;
+    color: #FEFEFE;
+    background-color: #FF0000;
+    font-size: 20px;
+    padding: 24px 0;
+
+}
