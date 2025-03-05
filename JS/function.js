@@ -1,7 +1,35 @@
+
+let tableauFav =[]
 function articleCree(pokemon) {
+    let fav=0
     const article =document.createElement("article")
     const div =document.createElement("div")
     const img = document.createElement("img")
+    const i = document.createElement("i")
+    i.setAttribute("class",`fa-regular fa-star `)
+    i.addEventListener("click",()=>{
+        if(fav%2==0){
+            i.setAttribute("class",`fa-solid fa-star fav`)
+            fav++
+            tableauFav.push(pokemon.id)
+            console.log(tableauFav)
+        }
+        else{
+            i.setAttribute("class",`fa-regular fa-star `)
+            fav++
+            let tabTemp = []
+            for(let i =0;i<tableauFav.length;i++){
+                
+                if (tableauFav[i]!=pokemon.id){
+                    tabTemp.push(tableauFav[i])
+
+                }
+            }
+            tableauFav=tabTemp
+            console.log(tableauFav)
+        }
+        
+    })
     if(pokemon.sprites.other.dream_world.front_default!=null){
         img.setAttribute("src",pokemon.sprites.other.dream_world.front_default)
     }
@@ -21,7 +49,7 @@ function articleCree(pokemon) {
         span.textContent= pokemon.types[j].type.name
         div.appendChild(span)
     }
-    div.innerHTML= `${div.innerHTML} <i class="fa-regular fa-star"></i>`
+    div.appendChild(i)
     if(pokemon.types[0].type.name=="normal"){
         article.setAttribute("class",`${article.classList} normal`)
     }
