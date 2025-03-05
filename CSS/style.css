@@ -7,10 +7,93 @@
 	text-decoration: none;
 	list-style: none;
 	border: none;
-    
+    font-family:  "Manrope";
 }
+/*couleurs type*/
+.normal{
+    background-color: #cfcfcf;
+    border: 4px solid #cfcfcf;
+}
+.fighting{
+    background-color: #ff0059;
+    border: 4px solid #ff0059;
+}
+.flying{
+    background-color: #7f88ff;
+    border: 4px solid #7f88ff;
+}
+.poison{
+    background-color: #f92af2;
+    border: 4px solid #f92af2;
+}
+
+.ground{
+    background-color: #a73f02;
+    border: 4px solid #a73f02;
+}
+.rock{
+    background-color: #ffc393;
+    border: 4px solid #ffc393;
+}
+.bug{
+    background-color: #55ff2f;
+    border: 4px solid #55ff2f;
+}
+.ghost{
+    background-color: #d334ff;
+    border: 4px solid #d334ff;
+}
+.steel{
+    background-color: #397ea6;
+    border: 4px solid #397ea6;
+}
+.fire{
+    background-color: #ffae00;
+    border: 4px solid #ffae00;
+}
+.water{
+    background-color: #006eff;
+    border: 4px solid #006eff;
+}
+.grass{
+    background-color: #2FFF00;
+    border: 4px solid #2FFF00;
+}
+.electric{
+    background-color: #ffff00;
+    border: 4px solid #ffff00;
+}
+.psychic{
+    background-color: #ff0088;
+    border: 4px solid #ff0088;
+}
+.ice{
+    background-color: #00bbff;
+    border: 4px solid #00bbff;
+}
+.dragon{
+    background-color: #3c00ff;
+    border: 4px solid #3c00ff;
+}
+.dark{
+    background-color: #444444;
+    border: 4px solid #444444;
+}
+.fairy{
+    background-color: #ff00ff;
+    border: 4px solid #ff00ff;
+}
+.unknown{
+    background-color: black;
+    border: 4px solid black;
+}
+/*fin couleur*/
 img{
     width: 200px;
+}
+.container{
+    width: 1140px;
+    padding: 0 auto;
 }
 /*header*/
 header{
@@ -58,11 +141,72 @@ header>nav>a{
     border-radius: 8px;
     font-size: 16px;
 }
+/*body*/
 body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    font-size: 35px;
+    font-weight: 700;
+    margin: 24px 0;
+}
+main>div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 24px 0;
+}
+.filtre{
+    background-color: #3D7DCA;
+    color: #FEFEFE;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #1E1E1E;
+}
+main>section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+main>section>article{
+    border-radius: 16px;
+    width: 18%;      
+}
+main>section>article>img{
+    height: 135px;
+}
+main>section>article>div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #1E1E1E;
+    color: #FEFEFE;
+    border-radius: 16px;
+    padding: 8px;
+    gap: 8px;
+}
+main>section>article>div>span{
+    width: 45%;
+    text-align: center;
+}
+main>section>article>div>i{
+    width: 100%;
+    text-align: center;
 }
 /*Footer*/
 footer{
@@ -72,5 +216,5 @@ footer{
     background-color: #FF0000;
     font-size: 20px;
     padding: 24px 0;
-
+    width: 100%;
 }
