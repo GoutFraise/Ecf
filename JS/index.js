@@ -1,8 +1,125 @@
 const listPoke = document.querySelector(".listPokemon")
-const option = document.querySelectorAll("select")
-option.forEach((element) =>element.addEventListener("click",()=>{
+const region = document.querySelector("#region-select")
+const type = document.querySelector("#type-select")
+type.addEventListener("change",()=>{
+    region.options[region.selectedIndex]=region.options[0]
     listPoke.innerHTML=""
-}))
+    fetch(`https://pokeapi.co/api/v2/type/`)/*fetch pour tout les type */
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                for(let i =0 ;i< data.results.length;i++){
+                    if(data.results[i].name == type.options[type.selectedIndex].value){
+                        fetch(`${data.results[i].url}`)/* fetch le type selectionné  */
+                                .then(response => {
+                                    if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                    }
+                                    return response.json();
+                                })
+                                .then(pokedex => {
+                                    for(let j = 0 ; j< pokedex.pokemon.length;j++){
+                                        fetch(`${pokedex.pokemon[j].pokemon.url}`)/* fetch du pokemon */
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                throw new Error('Network response was not ok');
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(pokemon => {
+                                                articleCree(pokemon)
+                                            })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                            });
+                                        }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+})
+region.addEventListener("change",()=>{
+    type.options[type.selectedIndex]=type.options[0]
+    listPoke.innerHTML=""
+    fetch(`https://pokeapi.co/api/v2/region/`)/*fetch pour toute les region */
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                for(let i =0 ;i< data.results.length;i++){
+                    if(data.results[i].name == region.options[region.selectedIndex].value){
+                        fetch(`${data.results[i].url}`)/* fetch la region selectionné  */
+                            .then(response => {
+                                if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(pokedex => {
+                                fetch(`${pokedex.pokedexes[0].url}`) /* fetch pokedex region selectionné */
+                                        .then(response => {
+                                            if (!response.ok) {
+                                            throw new Error('Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(pokemon => {
+                                            for(let j=0;j<pokemon.pokemon_entries.length;j++){
+                                                fetch(pokemon.pokemon_entries[j].pokemon_species.url)/* fetch du pokemon pour recup son id */
+                                                        .then(response => {
+                                                            if (!response.ok) {
+                                                            throw new Error('Network response was not ok');
+                                                            }
+                                                            return response.json();
+                                                        })
+                                                        .then(pokemonid => {
+                                                            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonid.id}/`)/* fetch du pokemon */
+                                                                    .then(response => {
+                                                                        if (!response.ok) {
+                                                                        throw new Error('Network response was not ok');
+                                                                        }
+                                                                        return response.json();
+                                                                    })
+                                                                    .then(pokemon => {
+                                                                        articleCree(pokemon)
+                                                                    })
+                                                                    .catch(error => {
+                                                                        console.error('Error:', error);
+                                                                    });
+                                                        })           
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                        });
+                                            } 
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error);
+                                        });
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                }
+                
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+})
 fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
         .then(response => {
             if (!response.ok) {
@@ -20,86 +137,7 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
                             return response.json();
                         })
                         .then(pokemon => {
-                            const article =document.createElement("article")
-                            const div =document.createElement("div")
-                            const img = document.createElement("img")
-                            img.setAttribute("src",pokemon.sprites.other.dream_world.front_default)
-                            article.appendChild(img)
-                            let span = document.createElement("span")
-                            span.textContent= pokemon.id
-                            span.setAttribute("id",pokemon.id)
-                            div.appendChild(span)
-                            span = document.createElement("span")
-                            span.textContent= pokemon.name
-                            div.appendChild(span)
-                            for(let j=0; j<pokemon.types.length;j++){
-                                span = document.createElement("span")
-                                span.textContent= pokemon.types[j].type.name
-                                div.appendChild(span)
-                            }
-                            div.innerHTML= `${div.innerHTML} <i class="fa-regular fa-star"></i>`
-
-                            if(pokemon.types[0].type.name=="normal"){
-                                article.setAttribute("class",`${article.classList} normal`)
-                            }
-                            else if(pokemon.types[0].type.name=="fighting"){
-                                article.setAttribute("class",`${article.classList} fighting`)
-                            }
-                            else if(pokemon.types[0].type.name=="flying"){
-                                article.setAttribute("class",`${article.classList} flying`)
-                            }
-                            else if(pokemon.types[0].type.name=="poison"){
-                                article.setAttribute("class",`${article.classList} poison`)
-                            }
-                            else if(pokemon.types[0].type.name=="ground"){
-                                article.setAttribute("class",`${article.classList} ground`)
-                            }
-                            else if(pokemon.types[0].type.name=="rock"){
-                                article.setAttribute("class",`${article.classList} rock`)
-                            }
-                            else if(pokemon.types[0].type.name=="bug"){
-                                article.setAttribute("class",`${article.classList} bug`)
-                            }
-                            else if(pokemon.types[0].type.name=="ghost"){
-                                article.setAttribute("class",`${article.classList} ghost`)
-                            }
-                            else if(pokemon.types[0].type.name=="steel"){
-                                article.setAttribute("class",`${article.classList} steel`)
-                            }
-                            else if(pokemon.types[0].type.name=="fire"){
-                                article.setAttribute("class",`${article.classList} fire`)
-                            }
-                            else if(pokemon.types[0].type.name=="water"){
-                                article.setAttribute("class",`${article.classList} water`)
-                            }
-                            else if(pokemon.types[0].type.name=="grass"){
-                                article.setAttribute("class",`${article.classList} grass`)
-                            }
-                            else if(pokemon.types[0].type.name=="electric"){
-                                article.setAttribute("class",`${article.classList} electric`)
-                            }
-                            else if(pokemon.types[0].type.name=="psychic"){
-                                article.setAttribute("class",`${article.classList} psychic`)
-                            }
-                            else if(pokemon.types[0].type.name=="ice"){
-                                article.setAttribute("class",`${article.classList} ice`)
-                            }
-                            else if(pokemon.types[0].type.name=="dragon"){
-                                article.setAttribute("class",`${article.classList} dragon`)
-                            }
-                            
-                            else if(pokemon.types[0].type.name=="dark"){
-                                article.setAttribute("class",`${article.classList} dark`)
-                            }
-                            else if(pokemon.types[0].type.name=="fairy"){
-                                article.setAttribute("class",`${article.classList} fairy`)
-                            }
-                            
-                            else{
-                                article.setAttribute("class",`${article.classList} unknown`)
-                            }
-                            article.appendChild(div)
-                            listPoke.appendChild(article)
+                            articleCree(pokemon)
                         })
                         .catch(error => {
                             console.error('Error:', error);
