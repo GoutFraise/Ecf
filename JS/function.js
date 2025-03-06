@@ -6,29 +6,52 @@ function articleCree(pokemon) {
     const div =document.createElement("div")
     const img = document.createElement("img")
     const i = document.createElement("i")
-    i.setAttribute("class",`fa-regular fa-star `)
+    const linkMesPokemon = document.querySelector(".mesPokemons")
+    linkMesPokemon.setAttribute("href",`mesPokemons.html${window.location.search}`)
+    const index = document.querySelector(".index")
+    index.setAttribute("href",`index.html${window.location.search}`)
+    let param =''
+    if(!document.querySelector("#pageMesPokemon")){
+        i.setAttribute("class",`fa-regular fa-star`)    
+    }
+    else{
+        i.setAttribute("class",`fa-solid fa-star fav`)
+    }
     i.addEventListener("click",()=>{
         if(fav%2==0){
-            i.setAttribute("class",`fa-solid fa-star fav`)
+            if(!document.querySelector("#pageMesPokemon")){
+                i.setAttribute("class",`fa-solid fa-star fav`)
+            }
+            else{
+                i.setAttribute("class",`fa-regular fa-star`)
+            }
             fav++
-            tableauFav.push(pokemon.id)
-            console.log(tableauFav)
+            tableauFav.push(pokemon.id)            
         }
         else{
-            i.setAttribute("class",`fa-regular fa-star `)
+            if(!document.querySelector("#pageMesPokemon")){
+                i.setAttribute("class",`fa-regular fa-star`)
+                
+            }
+            else{
+                
+                i.setAttribute("class",`fa-solid fa-star fav`)
+            }
             fav++
             let tabTemp = []
             for(let i =0;i<tableauFav.length;i++){
-                
                 if (tableauFav[i]!=pokemon.id){
                     tabTemp.push(tableauFav[i])
-
                 }
             }
             tableauFav=tabTemp
             console.log(tableauFav)
         }
-        
+        for(let i =0;i<tableauFav.length;i++){
+            param=`${param}id${i}=${tableauFav[i]}&`
+        }
+        linkMesPokemon.setAttribute("href",`mesPokemons.html?${param}`)
+        index.setAttribute("href",`index.html?${param}`)  
     })
     if(pokemon.sprites.other.dream_world.front_default!=null){
         img.setAttribute("src",pokemon.sprites.other.dream_world.front_default)
@@ -107,8 +130,14 @@ function articleCree(pokemon) {
     else{
         article.setAttribute("class",`${article.classList} unknown`)
     }
+    article.addEventListener("click",()=>{
+        window.location.replace(`./pokemon.html?id=${pokemon.id}`)
+    })
     article.appendChild(div)
     if(pokemon.sprites.other.dream_world.front_default!=null && pokemon.sprites.front_default!= null){
         listPoke.appendChild(article)
     }
+}
+function creeFiche(data){
+    
 }
