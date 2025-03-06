@@ -15,8 +15,80 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
         }
         return response.json();
     })
-    .then(pokemon => {
-        console.log(pokemon)
+    .then(data => {
+        console.log(data)
+        
+        fetch(`${data.species.url}/`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(pokeSpecise => {
+                console.log(pokeSpecise)
+                fetch(`${pokeSpecise.evolution_chain.url}/`)
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(evoluionChain => {
+                        console.log(evoluionChain)
+                        fetch(`https://pokeapi.co/api/v2/pokemon/${evoluionChain.chain.species.name}/`)
+                            .then(response => {
+                                if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(evoluionChain => {
+                                creeFiche(evoluionChain) 
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        if(evoluionChain.chain.evolves_to[0]!=null){
+                            fetch(`https://pokeapi.co/api/v2/pokemon/${evoluionChain.chain.evolves_to[0].species.name}/`)
+                                .then(response => {
+                                    if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                    }
+                                    return response.json();
+                                })
+                                .then(evoluionChain => {
+                                    creeFiche(evoluionChain) 
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                            if(evoluionChain.chain.evolves_to[0].evolves_to[0]!=null){
+                                fetch(`https://pokeapi.co/api/v2/pokemon/${evoluionChain.chain.evolves_to[0].evolves_to[0].species.name}/`)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                        throw new Error('Network response was not ok');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(evoluionChain => {
+                                        creeFiche(evoluionChain) 
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    });
+                            }
+                        }
+                        
+         
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    }); 
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         
     })
     .catch(error => {

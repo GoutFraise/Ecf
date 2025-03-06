@@ -121,6 +121,7 @@ header>div {
     border-radius: 20px;
     font-size: 16px;
     width:100%;
+    align-items: center;
 }
 header>div>i{
     padding: 10px 0;
@@ -179,7 +180,7 @@ main>div{
     border-radius: 8px;
     border: 2px solid #1E1E1E;
 }
-main>section{
+main>.listPokemon{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -188,14 +189,14 @@ main>section{
     padding-bottom:24px ;
 }
 
-main>section>article{
+main>.listPokemon>article{
     border-radius: 16px;
     width: 18%;      
 }
-main>section>article>img{
+main>.listPokemon>article>img{
     height: 135px;
 }
-main>section>article>div{
+main>.listPokemon>article>div{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -206,11 +207,11 @@ main>section>article>div{
     padding: 8px;
     gap: 8px;
 }
-main>section>article>div>span{
+main>.listPokemon>article>div>span{
     width: 45%;
     text-align: center;
 }
-main>section>article>div>i{
+main>.listPokemon>article>div>i{
     width: 100%;
     text-align: center;
 }
@@ -223,4 +224,34 @@ footer{
     font-size: 20px;
     padding: 24px 0;
     width: 100%;
+}
+/*fiche pokemon*/
+main>#listFiche{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 24px 0;
+   
+}
+main>#listFiche>article{
+    border-radius: 16px;
+    background-color: lightgray;
+    width: 100% ;   
+    display: flex;
+    padding: 24px;
+    gap: 24px;
+}
+main>#listFiche>article>img{
+    width: 30%;
+    padding: 24px;
+    border-radius: 16px;
+
+}
+main>#listFiche>article>div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+main>#listFiche>article>div>span{
+    width:48%;
 }
