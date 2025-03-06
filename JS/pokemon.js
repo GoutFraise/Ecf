@@ -16,8 +16,6 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
         return response.json();
     })
     .then(data => {
-        console.log(data)
-        
         fetch(`${data.species.url}/`)
             .then(response => {
                 if (!response.ok) {
@@ -26,7 +24,6 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
                 return response.json();
             })
             .then(pokeSpecise => {
-                console.log(pokeSpecise)
                 fetch(`${pokeSpecise.evolution_chain.url}/`)
                     .then(response => {
                         if (!response.ok) {
@@ -35,7 +32,6 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
                         return response.json();
                     })
                     .then(evoluionChain => {
-                        console.log(evoluionChain)
                         fetch(`https://pokeapi.co/api/v2/pokemon/${evoluionChain.chain.species.name}/`)
                             .then(response => {
                                 if (!response.ok) {
@@ -43,8 +39,8 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
                                 }
                                 return response.json();
                             })
-                            .then(evoluionChain => {
-                                creeFiche(evoluionChain) 
+                            .then(evoluionPoke => {
+                                creeFiche(evoluionPoke) 
                             })
                             .catch(error => {
                                 console.error('Error:', error);
@@ -57,8 +53,8 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
                                     }
                                     return response.json();
                                 })
-                                .then(evoluionChain => {
-                                    creeFiche(evoluionChain) 
+                                .then(evoluionPoke => {
+                                    creeFiche(evoluionPoke) 
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
@@ -71,8 +67,8 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${urlParams.get(`id`)}/`)
                                         }
                                         return response.json();
                                     })
-                                    .then(evoluionChain => {
-                                        creeFiche(evoluionChain) 
+                                    .then(evoluionPoke => {
+                                        creeFiche(evoluionPoke) 
                                     })
                                     .catch(error => {
                                         console.error('Error:', error);

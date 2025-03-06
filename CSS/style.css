@@ -116,7 +116,7 @@ header>div,header>div>input::placeholder, header>nav>a,header>div>input{
 }
 header>div {
     display: flex;
-    padding: 0 10px ;
+    padding: 0 20px ;
     gap: 16px;
     border-radius: 20px;
     font-size: 16px;
@@ -172,6 +172,10 @@ main>div{
     font-weight: 700;
     font-size: 20px;
     margin: 24px 0;
+}
+main>div>div{
+    display: flex;
+    gap: 20px;
 }
 .filtre{
     background-color: #3D7DCA;
@@ -254,4 +258,141 @@ main>#listFiche>article>div{
 }
 main>#listFiche>article>div>span{
     width:48%;
+}
+/*responsivev*/
+@media (min-width: 992px) and  (max-width:1199px){
+    .container{
+        width: 920px;
+    }
+    header{
+        gap: 60px;
+    }
+    main>.listPokemon>article{
+        width: 22%;
+    }
+    main>.listPokemon>article>img{
+        width: 100%;
+        height: 100px;
+    }
+}
+@media (min-width: 768px) and  (max-width:991px){
+    .container{
+        width: 750px; 
+    }
+    header{
+        gap: 20px;
+    }
+    main>.listPokemon>article{
+        width: 31%;
+    }
+    main>.listPokemon>article>img{
+        width: 100%;
+        height: 100px;
+    }
+}
+@media (min-width: 512px) and  (max-width:767px){
+    .container{
+        width: 500px;
+    }
+    header{
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px 20px;
+        justify-content: space-around;
+    }
+    header>div{
+        width: auto;
+    }
+    header>nav{
+        width: 100%;
+        justify-content: space-around;
+
+    }
+    main>.listPokemon>article{
+        width: 48%;
+    }
+    main>.listPokemon>article>img{
+        width: 100%;
+        height: 100px;
+    }
+    main>div>div{
+        gap: 10px;
+    }
+    .filtre{
+        font-size: 14px;
+        border: 1px solid #1E1E1E;
+    }
+    main>#listFiche>article{
+        flex-direction: column;
+    }
+    main>#listFiche>article>img{
+        align-self: center;
+        width: 50%;
+    }
+    main>#listFiche>article>div{
+        justify-content:space-between;
+        width: 100%;
+        gap: 10px;
+    }
+    main>#listFiche>article>div>span{
+        width: 40%;
+        text-align:justify;
+    }
+    
+}
+@media (min-width: 0px) and  (max-width:511px){
+    .container{
+        width: 100%;
+    }
+    header{
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px 20px;
+        justify-content: space-around;
+    }
+    header>div{
+        width: auto;
+    }
+    header>nav{
+        width: 100%;
+        justify-content: space-around;
+
+    }
+    main>.listPokemon>article{
+        width: 46%;
+    }
+    main>.listPokemon>article>img{
+        width: 100%;
+        height: 100px;
+    }
+    main>div>div{
+        gap: 10px;
+    }
+    main>div{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .filtre{
+        font-size: 14px;
+        border: 1px solid #1E1E1E;
+    }
+    main>#listFiche>article{
+        flex-direction: column;
+    }
+    main>#listFiche>article>img{
+        align-self: center;
+        width: 50%;
+    }
+    main>#listFiche>article>div{
+        justify-content:space-between;
+        width: 100%;
+        gap: 10px;
+
+    }
+    main>#listFiche>article>div>span{
+        width: 45%;
+        text-align:justify;
+    }
+    
 }
