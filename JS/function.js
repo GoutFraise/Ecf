@@ -1,4 +1,5 @@
-
+const lurlParams = new URLSearchParams(window.location.search);
+let listFav = new Object();
 let tableauFav =[]
 function articleCree(pokemon) {
     let fav=0
@@ -10,6 +11,9 @@ function articleCree(pokemon) {
     linkMesPokemon.setAttribute("href",`mesPokemons.html${window.location.search}`)
     const index = document.querySelector(".index")
     index.setAttribute("href",`index.html${window.location.search}`)
+    for(let i =0;i<lurlParams.size;i++){
+        tableauFav[`id${i}`]=lurlParams.get(`id${i}`);
+    }
     let param =''
     if(!document.querySelector("#pageMesPokemon")){
         i.setAttribute("class",`fa-regular fa-star`)    
@@ -34,7 +38,6 @@ function articleCree(pokemon) {
                 
             }
             else{
-                
                 i.setAttribute("class",`fa-solid fa-star fav`)
             }
             fav++
@@ -46,9 +49,11 @@ function articleCree(pokemon) {
             }
             tableauFav=tabTemp
         }
+        console.log(tableauFav)
         for(let i =0;i<tableauFav.length;i++){
             param=`${param}id${i}=${tableauFav[i]}&`
         }
+        console.log(param)
         linkMesPokemon.setAttribute("href",`mesPokemons.html?${param}`)
         index.setAttribute("href",`index.html?${param}`)  
     })
