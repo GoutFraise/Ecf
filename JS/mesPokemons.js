@@ -1,4 +1,7 @@
 const listPoke = document.querySelector(".listPokemon")
+const recherche = document.querySelector('.rechercheIcon')
+const champrecherche = document.querySelector('.recherche')
+laRecherche()
 const urlParams = new URLSearchParams(window.location.search);
 let listFav = new Object();
 for(let i =0;i<urlParams.size;i++){

@@ -1,6 +1,9 @@
 const listPoke = document.querySelector(".listPokemon")
 const region = document.querySelector("#region-select")
 const type = document.querySelector("#type-select")
+const recherche = document.querySelector('.rechercheIcon')
+const champrecherche = document.querySelector('.recherche')
+laRecherche()
 type.addEventListener("change",()=>{
     region.options[region.selectedIndex]=region.options[0]
     listPoke.innerHTML=""

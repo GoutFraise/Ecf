@@ -243,7 +243,90 @@ function creeFiche(data){
     
     article.appendChild(div)
     if(data.sprites.other.dream_world.front_default!=null && data.sprites.front_default!= null){
-        listFiche.appendChild(article)
+        listPoke.appendChild(article)
     }
+
+}
+function laRecherche(){
+    recherche.addEventListener("click",()=>{
+        if(champrecherche.value===""){
+            alert("Le champ est vide")
+        }
+        else{
+            listPoke.innerHTML = "";
+            let champValue =champrecherche.value
+            champrecherche.value=""
+            fetch(`https://pokeapi.co/api/v2/pokemon/?limit=100`)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                        for(let i =0;i<data.results.length-1;i++){
+                            if(data.results[i].name.includes(champValue) ){
+                                fetch(`https://pokeapi.co/api/v2/pokemon/${data.results[i].name}`)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                        throw new Error('Network response was not ok');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(pokemon => {
+                                            articleCree(pokemon)
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    });
+                                }
+                            }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+    })
+    champrecherche.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+        if(champrecherche.value===""){
+                alert("Le champ est vide")
+            }
+            else{
+                listPoke.innerHTML = "";
+                let champValue =champrecherche.value
+                champrecherche.value=""
+                fetch(`https://pokeapi.co/api/v2/pokemon/?limit=100`)
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                            for(let i =0;i<data.results.length-1;i++){
+                                if(data.results[i].name.includes(champValue) ){
+                                    fetch(`https://pokeapi.co/api/v2/pokemon/${data.results[i].name}`)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                            throw new Error('Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(pokemon => {
+                                                articleCree(pokemon)
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error);
+                                        });
+                                    }
+                                }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            }
+        })
 
 }
